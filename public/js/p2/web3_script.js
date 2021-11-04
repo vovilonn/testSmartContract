@@ -162,7 +162,7 @@ function createSharesHandler() {
                 const price = document.forms.txForm.price.value;
                 if (tokenId > 0 && amount > 0 && price > 0) {
                     //========HANDLERS==========
-                    createShares(tokenId, amount, price);
+                    await createShares(tokenId, amount, price);
                     //==========================
                     toggleModal(txModal, false, handleTransaction);
                 } else {
@@ -182,10 +182,9 @@ function createSharesHandler() {
 
 async function createShares(tokenId, amount, price) {
     try {
-        // const weiPrice = ethers.utils.hexlify(ethers.utils.parseEther(price.toString()));
-        const weiPrice = "0x" + parseInt(price, 10).toString(16);
-        const trustedInstance = contractInstance.connect(signer);
-        const res = await trustedInstance.createShares(tokenId, amount, weiPrice);
+        const weiPrice = ethers.utils.hexlify(ethers.utils.parseEther(price.toString()));
+        // const weiPrice = "0x" + parseInt(price, 10).toString(16); // without convert to wei
+        const res = await contractInstance.createShares(tokenId, amount, weiPrice);
         console.log(res);
     } catch (err) {
         console.error(err);
