@@ -182,9 +182,9 @@ function createSharesHandler() {
 
 async function createShares(tokenId, amount, price) {
     try {
-        // const weiPrice = ethers.utils.hexlify(ethers.utils.parseEther(price.toString()));
+        const weiPrice = ethers.utils.hexlify(ethers.utils.parseEther(price.toString()));
         // const weiPrice = "0x" + parseInt(price, 10).toString(16); // without convert to wei
-        const res = await contractInstance.createShares(tokenId, amount, price);
+        const res = await contractInstance.createShares(tokenId, amount, weiPrice);
         console.log(res);
     } catch (err) {
         console.error(err);
