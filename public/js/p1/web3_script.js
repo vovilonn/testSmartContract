@@ -1,6 +1,6 @@
 import ABI from "./abi.js";
 // const contractAddress = "0xCd8FED47ab8599Da0e15B9fD80fB5d6220b49942";
-const contractAddress = "0x8D432633Ca8D98288B97040dd7f96bA941101263";
+const contractAddress = "0x6eD151B3F1938F77bA4D68EdE8B56F277fa5EE26";
 const mainChainId = "97";
 
 const connectBtn = document.querySelector("#connectBtn");
