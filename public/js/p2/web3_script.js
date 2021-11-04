@@ -1,4 +1,4 @@
-import ABI from "../p1/abi.js";
+import ABI from "./abi.js";
 const contractAddress = "0x9e7BB20cd3C4FEFde4C9d35ed9b29b4D68EDC847";
 const mainChainId = "97";
 
@@ -55,7 +55,11 @@ async function doConnect() {
 
 async function validateNetwork() {
     if (currentNetwork !== ethereum.networkVersion) {
-        await switchBscNetwork();
+        try {
+            await switchBscNetwork();
+        } catch (err) {
+            return false;
+        }
     }
     return true;
 }
@@ -77,7 +81,7 @@ async function switchBscNetwork() {
 async function create() {
     await validateNetwork();
     const generateJson = async (params) => {
-        const URL = "https://google.com";
+        const URL = "https://cubebot.fun/json";
         const json = JSON.stringify(params);
         const response = await fetch(URL, {
             method: "POST",
@@ -88,9 +92,9 @@ async function create() {
         });
 
         // ====DEBUG====
-        if (response.ok) {
-            alert(json);
-        }
+        // if (response.ok) {
+        //     alert(json);
+        // }
         // =============
     };
     const handleCreate = async (e) => {
@@ -101,6 +105,7 @@ async function create() {
                     toggleModal(jsonModal, false, handleCreate);
                     break;
                 case "submit": {
+                    await validateNetwork();
                     const mp3Url = document.forms.jsonForm.mp3Url.value;
                     const name = document.forms.jsonForm.name.value;
                     const author = document.forms.jsonForm.author.value;
@@ -116,7 +121,7 @@ async function create() {
                         songText !== ""
                     ) {
                         //========handlers==========
-                        await contractInstance.create();
+                        contractInstance.create();
                         generateJson({ mp3Url, name, author, pressRelease, cover, songText });
                         //==========================
                     } else {
@@ -139,7 +144,6 @@ async function create() {
 
 function createSharesHandler() {
     const handleTransaction = async (e) => {
-        await validateNetwork();
         const target = e.target;
 
         switch (target.id) {
@@ -151,7 +155,7 @@ function createSharesHandler() {
                 const amount = document.forms.txForm.amount.value;
                 const price = document.forms.txForm.price.value;
                 if (tokenId > 0 && amount > 0 && price > 0) {
-                    //========handlers==========
+                    //========HANDLERS==========
                     createShares(tokenId, amount, price);
                     //==========================
                     toggleModal(txModal, false, handleTransaction);

@@ -54,7 +54,11 @@ async function doConnect() {
 
 async function validateNetwork() {
     if (currentNetwork !== ethereum.networkVersion) {
-        await switchBscNetwork();
+        try {
+            await switchBscNetwork();
+        } catch (err) {
+            return false;
+        }
     }
     return true;
 }
