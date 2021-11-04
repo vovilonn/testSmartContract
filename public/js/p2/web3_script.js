@@ -1,4 +1,4 @@
-import ABI from "./abi.js";
+import ABI from "../p1/abi.js";
 const contractAddress = "0x9e7BB20cd3C4FEFde4C9d35ed9b29b4D68EDC847";
 const mainChainId = "97";
 
