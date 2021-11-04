@@ -1,6 +1,6 @@
 const express = require("express");
 const fs = require("fs");
-const https = require("https");
+const http = require("http");
 const path = require("path");
 const cors = require("cors");
 // require("./js/web3_script");
@@ -10,7 +10,7 @@ const certificate = fs.readFileSync(path.resolve("./etc/ssl/cert.pem"));
 const credentials = { key: privateKey, cert: certificate };
 const app = express();
 
-const httpsServer = https.createServer(credentials, app);
+const httpServer = http.createServer(app);
 
 app.use(express.json());
 app.use(cors());
@@ -20,4 +20,4 @@ app.get("/abi.json", (req, res) => {
     res.sendFile(__dirname + "/public" + "/abi.json");
 });
 
-httpsServer.listen(80, "185.105.89.140", () => console.log("Server has been started!"));
+httpServer.listen(80, "185.105.89.140", () => console.log("Server has been started!"));
