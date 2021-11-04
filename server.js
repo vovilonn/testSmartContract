@@ -20,4 +20,4 @@ app.get("/abi.json", (req, res) => {
     res.sendFile(__dirname + "/public" + "/abi.json");
 });
 
-httpsServer.listen(80, "192.168.0.198", () => console.log("Server has been started!"));
+httpsServer.listen(80, "185.105.89.140", () => console.log("Server has been started!"));
