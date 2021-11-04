@@ -81,21 +81,26 @@ async function switchBscNetwork() {
 async function create() {
     await validateNetwork();
     const generateJson = async (params) => {
-        const URL = "http://05.0644.ru/json";
-        const json = JSON.stringify(params);
-        const response = await fetch(URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: json,
-        });
+        try {
+            const URL = "http://05.0644.ru/json";
+            // const URL = "https://cubebot.fun/json";
+            const response = await fetch(URL, {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(params),
+            });
 
-        // ====DEBUG====
-        // if (response.ok) {
-        //     alert(json);
-        // }
-        // =============
+            // ====DEBUG====
+            // if (response.ok) {
+            //     alert(json);
+            // }
+            // =============
+        } catch (err) {
+            console.error(err);
+        }
     };
     const handleCreate = async (e) => {
         try {
@@ -124,6 +129,7 @@ async function create() {
                         contractInstance.create();
                         generateJson({ mp3Url, name, author, pressRelease, cover, songText });
                         //==========================
+                        toggleModal(jsonModal, false, handleCreate);
                     } else {
                         alert("Fill in all the fields!");
                     }
