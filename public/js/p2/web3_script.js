@@ -182,7 +182,8 @@ function createSharesHandler() {
 
 async function createShares(tokenId, amount, price) {
     try {
-        const weiPrice = ethers.utils.hexlify(ethers.utils.parseEther(price.toString()));
+        // const weiPrice = ethers.utils.hexlify(ethers.utils.parseEther(price.toString()));
+        const weiPrice =  "0x" + parseInt(price, 10).toString(16),
         const trustedInstance = contractInstance.connect(signer);
         const res = await trustedInstance.createShares(tokenId, amount, weiPrice);
         console.log(res);
