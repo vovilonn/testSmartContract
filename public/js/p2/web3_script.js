@@ -81,7 +81,7 @@ async function switchBscNetwork() {
 async function create() {
     await validateNetwork();
     const generateJson = async (params) => {
-        const URL = "https://cubebot.fun/json";
+        const URL = "http://05.0644.ru/json";
         const json = JSON.stringify(params);
         const response = await fetch(URL, {
             method: "POST",
